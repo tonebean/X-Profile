@@ -9,7 +9,7 @@
 
 /* ============ 1. 字符串替换（换号后改这里） ============ */
 var REPLACE = [
-  ["g1.ios.20tb.m.v2", "g1.20tb.3months_ip_90p.acq"],
+  ["g1.ios.20tb.m.v2", "g1.20tb.3months_ip_75p.acq"],
   ["g1.ios.30tb.ai.pro.m", "g1.ai.ultra.3months_ip_90p.acq"]
 ];
 
