@@ -1,0 +1,79 @@
+# Claude / Anthropic 完整分流规则（Quantumult X 规则列表）
+#
+# 用法：在 QX 里作为「策略组/分流规则」引用，必须放在通用规则之前。
+# 依赖：QX 客户端需预先建好名为 AI 的策略组（本文件只定义规则，不定义策略组）。
+# 来源：图片清单 + honk 10.0.0.4 AI 段对照补齐。
+# 最后核对：2026-11-22
+#
+# 说明：
+#   - DOMAIN-KEYWORD 两条为兜底，覆盖未逐条列出的 anthropic.* / claude.* 子域
+#     （与 honk 的 keyword 规则对齐）。
+#   - honk 另有「Google 全系 / OpenAI / 其他 AI」走 AI 的规则，不属于 Claude
+#     生态，未纳入本文件；如需 Gemini/Antigravity/其他 AI 一并走 AI 组，请自行添加。
+#   - 标注 [失效] 的域名为 2026-11-22 实测 DoH 无 A 记录，暂保留待观察。
+
+# ===== 1. Anthropic / Claude 自有域名 =====
+DOMAIN-SUFFIX,claude.ai,AI
+DOMAIN-SUFFIX,anthropic.com,AI
+DOMAIN-SUFFIX,claude.com,AI
+DOMAIN-SUFFIX,claudeusercontent.com,AI
+DOMAIN-SUFFIX,claude.app,AI
+DOMAIN-SUFFIX,claudemcpcontent.com,AI
+DOMAIN-SUFFIX,clau.de,AI
+DOMAIN-SUFFIX,claudemcpclient.com,AI
+DOMAIN-SUFFIX,claude.dev,AI
+DOMAIN-SUFFIX,claude.site,AI
+DOMAIN-SUFFIX,claudeacademy.com,AI
+DOMAIN-SUFFIX,claude.new,AI
+DOMAIN-SUFFIX,anthropic.team,AI
+DOMAIN-SUFFIX,chatbotclaude.com,AI
+DOMAIN-SUFFIX,claudepages.dev,AI
+DOMAIN-SUFFIX,claudestudio.com,AI
+DOMAIN-SUFFIX,anthropic.auth0.com,AI
+DOMAIN-SUFFIX,servd-anthropic-website.b-cdn.net,AI
+DOMAIN-SUFFIX,anthropic.com.ghost.io,AI
+DOMAIN-SUFFIX,anthropic.com.cdn.cloudflare.net,AI
+# 漏项补齐：MCP 官方域名（honk 有，图片清单缺）
+DOMAIN-SUFFIX,modelcontextprotocol.io,AI
+# [失效] ant.dev 实测无 A 记录，保留待观察
+DOMAIN-SUFFIX,ant.dev,AI
+DOMAIN-SUFFIX,antspace.dev,AI
+
+# ===== 2. 支付 / 风控 / 前端埋点 =====
+DOMAIN-SUFFIX,intercom.io,AI
+DOMAIN-SUFFIX,intercomcdn.com,AI
+# [失效] intercomassets.com 实测无 A 记录，保留待观察
+DOMAIN-SUFFIX,intercomassets.com,AI
+# [失效] intercom-messenger.com 实测无 A 记录，保留待观察
+DOMAIN-SUFFIX,intercom-messenger.com,AI
+DOMAIN-SUFFIX,siftscience.com,AI
+DOMAIN-SUFFIX,us5.datadoghq.com,AI
+DOMAIN-SUFFIX,browser-intake-us5-5-datadoghq.com,AI
+DOMAIN-SUFFIX,r.stripe.com,AI
+DOMAIN-SUFFIX,us.sentry.io,AI
+DOMAIN-SUFFIX,fcmtoken.googleapis.com,AI
+# 漏项补齐（honk 有，图片清单缺）
+DOMAIN-SUFFIX,growthbook.io,AI
+DOMAIN-SUFFIX,segment.io,AI
+DOMAIN-SUFFIX,webshare.io,AI
+DOMAIN-SUFFIX,stripe.network,AI
+DOMAIN-SUFFIX,stripecdn.com,AI
+DOMAIN-SUFFIX,usefathom.com,AI
+
+# ===== 3. 人机验证 / KYC / 统计 =====
+DOMAIN-SUFFIX,hcaptcha.com,AI
+DOMAIN-SUFFIX,challenges.cloudflare.com,AI
+DOMAIN-SUFFIX,withpersona.com,AI
+DOMAIN-SUFFIX,yoti.com,AI
+DOMAIN-SUFFIX,statsigapi.net,AI
+DOMAIN-SUFFIX,cdn.usefathom.com,AI
+
+# ===== 4. IP 段（no-resolve：命中 IP 规则时不再查 DNS）=====
+IP-CIDR,34.8.0.0/16,AI,no-resolve
+IP-CIDR,160.79.104.0/21,AI,no-resolve
+IP-CIDR,153.61.208.0/20,AI,no-resolve
+IP-CIDR,153.61.224.0/22,AI,no-resolve
+
+# ===== 5. 关键词兜底（放最后，覆盖未逐条列出的子域）=====
+DOMAIN-KEYWORD,anthropic,AI
+DOMAIN-KEYWORD,claude,AI
